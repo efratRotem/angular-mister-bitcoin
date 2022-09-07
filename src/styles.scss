@@ -1,1 +1,10 @@
-/* You can add global styles to this file, and also import other style files */
+// BASICS
+@import './styels/basics/base';
+@import './styels/basics/buttons';
+@import './styels/basics/helpers';
+@import './styels/basics/layout';
+// SETUP
+@import './styels/setup/functions';
+@import './styels/setup/mixins';
+@import './styels/setup/typography';
+@import './styels/setup/_variables.scss';
