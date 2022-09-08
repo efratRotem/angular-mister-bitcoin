@@ -1,18 +1,20 @@
+@import '../setup/variables';
+
 * {
     box-sizing: border-box;
 }
 
 html {
     height: 100%;
-    color: $text-primary;
-    font-family: Macan-light;
+    color: $main-text;
+    font-family: Titillium-Web;
     font-size: 16px;
 }
 
 body {
     margin: 0;
     padding: 0;
-    background-color: $background-primary;
+    background-color: $main-background;
 }
 
 img {

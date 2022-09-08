@@ -1,0 +1,21 @@
+@import '../../../styels/setup/variables';
+
+.app-header {
+    padding: 10px;
+
+    h1 {
+        font-size: 2rem;
+        flex-grow: 1;
+    }
+
+    a:not(:last-child) {
+        margin-right: 30px;
+    }
+
+    a {
+       &:hover {
+            background-color: $main-background;
+            color: $main-text;
+        }
+    }
+}
