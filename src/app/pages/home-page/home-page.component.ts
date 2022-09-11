@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Contact } from 'src/app/models/contact.model';
+import { ContactService } from 'src/app/services/contact-service/contact.service';
 
 @Component({
   selector: 'home-page',
@@ -10,14 +11,16 @@ export class HomePageComponent implements OnInit {
 
   user!: Contact
 
-  constructor() { }
+  constructor(private contactService: ContactService) { }
 
   ngOnInit(): void {
     this.getUser()
   }
 
   getUser() {
-    console.log('Getting user')
+    this.user = this.contactService.getUser()
+    this.user.coins = 100
+    console.log(this.user);
 
   }
 

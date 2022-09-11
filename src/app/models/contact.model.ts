@@ -4,7 +4,9 @@ export class Contact {
         public _id?: string,
         public name: string = '',
         public email: string = '',
-        public phone: string = '') {
+        public phone: string = '',
+        public coins?: number,
+    ) {
     }
 
     setId?(id: string = 'r101') {
