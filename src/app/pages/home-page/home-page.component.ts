@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Contact } from 'src/app/models/contact.model';
+import { BitcoinService } from 'src/app/services/bitcoin-service/bitcoin.service';
 import { ContactService } from 'src/app/services/contact-service/contact.service';
 
 @Component({
@@ -10,11 +11,21 @@ import { ContactService } from 'src/app/services/contact-service/contact.service
 export class HomePageComponent implements OnInit {
 
   user!: Contact
+  btc!: number
 
-  constructor(private contactService: ContactService) { }
+  constructor(
+    private contactService: ContactService,
+    private bitcoinService: BitcoinService
+    ) { }
 
   ngOnInit(): void {
     this.getUser()
+    const btc$ = this.bitcoinService.getRate()
+    btc$.subscribe((rate: number) => {
+      this.btc = rate
+      console.log(this.btc);
+      
+    })
   }
 
   getUser() {
