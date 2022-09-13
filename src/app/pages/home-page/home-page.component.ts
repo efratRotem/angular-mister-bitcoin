@@ -12,27 +12,25 @@ export class HomePageComponent implements OnInit {
 
   user!: Contact
   btc!: number
+  dollar!: number
 
   constructor(
     private contactService: ContactService,
     private bitcoinService: BitcoinService
-    ) { }
+  ) { }
 
   ngOnInit(): void {
     this.getUser()
     const btc$ = this.bitcoinService.getRate()
     btc$.subscribe((rate: number) => {
       this.btc = rate
-      console.log(this.btc);
-      
+      this.dollar = this.user.coins ? this.user.coins / rate : 0
     })
   }
 
   getUser() {
     this.user = this.contactService.getUser()
     this.user.coins = 100
-    console.log(this.user);
-
   }
 
 }
