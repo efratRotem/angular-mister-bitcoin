@@ -6,12 +6,14 @@ import { AppComponent } from './app-root/app.component';
 import { AppHeaderComponent } from './cmps/app-header/app-header.component';
 import { HomePageComponent } from './pages/home-page/home-page.component';
 import { HttpClientModule } from '@angular/common/http';
+import { StatisticsComponent } from './cmps/statistics/statistics.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     AppHeaderComponent,
-    HomePageComponent
+    HomePageComponent,
+    StatisticsComponent
   ],
   imports: [
     BrowserModule,
