@@ -54,6 +54,14 @@ export class StatisticsComponent implements OnInit {
           y: {
             beginAtZero: true
           }
+        },
+        elements: {
+          point: {
+            pointStyle: 'line'
+          },
+          line : {
+            borderColor:  'rgb(254, 202, 30)'
+          }
         }
       }
     })
