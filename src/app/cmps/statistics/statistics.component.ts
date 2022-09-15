@@ -33,7 +33,7 @@ export class StatisticsComponent implements OnInit {
       type: 'line',
       data: {
         // labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
-        labels: this.marketPrice.map(item => item.x),
+        labels: this.marketPrice.map(item => new Date(item.x).toLocaleDateString()),
         datasets: [{
           label: 'The average USD market price across major bitcoin exchanges.',
           // data: [12, 19, 3, 5, 2, 3],
@@ -44,7 +44,9 @@ export class StatisticsComponent implements OnInit {
           borderColor: [
             'rgba(255, 99, 132, 1)',
           ],
-          borderWidth: 0.1
+          borderWidth: 0.1,
+          pointBorderWidth: 0.01,
+          fill: 'origin'
         }]
       },
       options: {
