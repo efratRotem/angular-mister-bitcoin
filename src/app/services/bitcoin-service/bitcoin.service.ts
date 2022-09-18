@@ -622,8 +622,10 @@ export class BitcoinService {
   }
 
   getMarketPrice() {
-    return this.marketPrice
-    // return this.http.get('https://api.blockchain.info/charts/market-price?timespan=5months&format=json&cors=true')
-    //   .pipe(map(res => res))
+    // return this.marketPrice
+    return this.http.get('https://api.blockchain.info/charts/market-price?timespan=5months&format=json&cors=true')
+      .pipe(map(res => res))
+  
+
   }
 }

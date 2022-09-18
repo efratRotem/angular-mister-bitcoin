@@ -10,18 +10,26 @@ import { BitcoinService } from 'src/app/services/bitcoin-service/bitcoin.service
 })
 export class StatisticsComponent implements OnInit {
 
-  marketPrice!: Array<any>
+  marketPrice!: Array<{ x: number, y: number }>
 
   constructor(private bitcoinService: BitcoinService) {
     Chart.register(...registerables)
   }
 
   ngOnInit(): void {
-    this.marketPrice = this.bitcoinService.getMarketPrice()
+    // this.marketPrice = this.bitcoinService.getMarketPrice()
+
+    const marketPrice$ = this.bitcoinService.getMarketPrice()
+    marketPrice$.subscribe((res: object) => {
+      const ress = res
+      console.log('ress', ress);
+
+    })
+
     console.log(this.marketPrice);
 
 
-    this.getMarketPrice()
+    // this.getMarketPrice()
   }
 
   getMarketPrice() {
@@ -33,7 +41,7 @@ export class StatisticsComponent implements OnInit {
       type: 'line',
       data: {
         // labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
-        labels: this.marketPrice.map(item => new Date(item.x*1000).toLocaleDateString()),
+        labels: this.marketPrice.map(item => new Date(item.x * 1000).toLocaleDateString()),
         datasets: [{
           label: 'The average USD market price across major bitcoin exchanges.',
           // data: [12, 19, 3, 5, 2, 3],
@@ -59,8 +67,8 @@ export class StatisticsComponent implements OnInit {
           point: {
             pointStyle: 'line'
           },
-          line : {
-            borderColor:  'rgb(254, 202, 30)'
+          line: {
+            borderColor: 'rgb(254, 202, 30)'
           }
         }
       }
