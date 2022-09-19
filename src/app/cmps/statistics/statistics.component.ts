@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core'
+import { Component, OnInit, OnDestroy } from '@angular/core'
 import { Chart, registerables } from 'chart.js'
-import { Observable } from 'rxjs'
+import { Observable, Subscription } from 'rxjs'
 import { BitcoinService } from 'src/app/services/bitcoin-service/bitcoin.service'
 
 @Component({
@@ -8,8 +8,9 @@ import { BitcoinService } from 'src/app/services/bitcoin-service/bitcoin.service
   templateUrl: './statistics.component.html',
   styleUrls: ['./statistics.component.scss']
 })
-export class StatisticsComponent implements OnInit {
+export class StatisticsComponent implements OnInit, OnDestroy {
 
+  subscribe!: Subscription
   marketPrice!: Array<{ x: number, y: number }>
 
   constructor(private bitcoinService: BitcoinService) {
@@ -19,21 +20,17 @@ export class StatisticsComponent implements OnInit {
   ngOnInit(): void {
     // this.marketPrice = this.bitcoinService.getMarketPrice()
 
-    const marketPrice$ = this.bitcoinService.getMarketPrice()
-    marketPrice$.subscribe((res: object) => {
-      const ress = res
-      console.log('ress', ress);
-
+    this.subscribe = this.bitcoinService.getMarketPrice().subscribe((res: any) => {
+      this.marketPrice = res.values
+      this.getMarketPrice()
     })
+  }
 
-    console.log(this.marketPrice);
-
-
-    // this.getMarketPrice()
+  ngOnDestroy(): void {
+    this.subscribe.unsubscribe()
   }
 
   getMarketPrice() {
-
     const canvas = document.getElementById('myChart') as HTMLCanvasElement
     const ctx = canvas?.getContext('2d')
 
