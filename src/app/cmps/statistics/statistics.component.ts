@@ -10,8 +10,10 @@ import { BitcoinService } from 'src/app/services/bitcoin-service/bitcoin.service
 })
 export class StatisticsComponent implements OnInit, OnDestroy {
 
-  subscribe!: Subscription
+  marketPriceSubscribe!: Subscription
+  confirmedTransSubscribe!: Subscription
   marketPrice!: Array<{ x: number, y: number }>
+  confirmedTransactions!: Array<{ x: number, y: number }>
 
   constructor(private bitcoinService: BitcoinService) {
     Chart.register(...registerables)
@@ -20,18 +22,24 @@ export class StatisticsComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     // this.marketPrice = this.bitcoinService.getMarketPrice()
 
-    this.subscribe = this.bitcoinService.getMarketPrice().subscribe((res: any) => {
+    this.marketPriceSubscribe = this.bitcoinService.getMarketPrice().subscribe((res: any) => {
       this.marketPrice = res.values
       this.getMarketPrice()
+    })
+
+    this.confirmedTransSubscribe = this.bitcoinService.getConfirmedTransactions().subscribe((res: any) => {
+      this.confirmedTransactions = res.values
+      this.getConfirmedTransactions()
     })
   }
 
   ngOnDestroy(): void {
-    this.subscribe.unsubscribe()
+    this.marketPriceSubscribe.unsubscribe()
+    this.confirmedTransSubscribe.unsubscribe()
   }
 
   getMarketPrice() {
-    const canvas = document.getElementById('myChart') as HTMLCanvasElement
+    const canvas = document.getElementById('market-price-chart') as HTMLCanvasElement
     const ctx = canvas?.getContext('2d')
 
     const myChart = new Chart(ctx!, {
@@ -72,4 +80,45 @@ export class StatisticsComponent implements OnInit, OnDestroy {
     })
   }
 
+  getConfirmedTransactions() {
+    const canvas = document.getElementById('confirmed-transactions') as HTMLCanvasElement
+    const ctx = canvas?.getContext('2d')
+
+    const myChart = new Chart(ctx!, {
+      type: 'line',
+      data: {
+        // labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+        labels: this.confirmedTransactions.map(item => new Date(item.x * 1000).toLocaleDateString()),
+        datasets: [{
+          label: 'The total USD value of trading volume on major bitcoin exchanges.',
+          // data: [12, 19, 3, 5, 2, 3],
+          data: this.confirmedTransactions.map(item => item.y),
+          backgroundColor: [
+            'rgb(254, 202, 30)',
+          ],
+          borderColor: [
+            'rgba(255, 99, 132, 1)',
+          ],
+          borderWidth: 0.1,
+          pointBorderWidth: 0.01,
+          fill: 'origin'
+        }]
+      },
+      options: {
+        scales: {
+          y: {
+            beginAtZero: true
+          }
+        },
+        elements: {
+          point: {
+            pointStyle: 'line'
+          },
+          line: {
+            borderColor: 'rgb(254, 202, 30)'
+          }
+        }
+      }
+    })
+  }
 }
