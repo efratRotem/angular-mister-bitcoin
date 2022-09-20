@@ -7,13 +7,19 @@ import { AppHeaderComponent } from './cmps/app-header/app-header.component';
 import { HomePageComponent } from './pages/home-page/home-page.component';
 import { HttpClientModule } from '@angular/common/http';
 import { StatisticsComponent } from './cmps/statistics/statistics.component';
+import { ContactPageComponent } from './pages/contact-page/contact-page/contact-page.component';
+import { ContactListComponent } from './cmps/contact-list/contact-list/contact-list.component';
+import { ContactPreviewComponent } from './cmps/contact-preview/contact-preview/contact-preview.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     AppHeaderComponent,
     HomePageComponent,
-    StatisticsComponent
+    StatisticsComponent,
+    ContactPageComponent,
+    ContactListComponent,
+    ContactPreviewComponent
   ],
   imports: [
     BrowserModule,

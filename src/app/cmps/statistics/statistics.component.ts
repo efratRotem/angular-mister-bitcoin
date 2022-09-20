@@ -10,7 +10,7 @@ import { BitcoinService } from 'src/app/services/bitcoin-service/bitcoin.service
 })
 export class StatisticsComponent implements OnInit, OnDestroy {
 
-  marketPriceSubscribe!: Subscription
+  marketPriceSubscription!: Subscription
   confirmedTransSubscribe!: Subscription
   marketPrice!: Array<{ x: number, y: number }>
   confirmedTransactions!: Array<{ x: number, y: number }>
@@ -22,7 +22,7 @@ export class StatisticsComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     // this.marketPrice = this.bitcoinService.getMarketPrice()
 
-    this.marketPriceSubscribe = this.bitcoinService.getMarketPrice().subscribe((res: any) => {
+    this.marketPriceSubscription = this.bitcoinService.getMarketPrice().subscribe((res: any) => {
       this.marketPrice = res.values
       this.getMarketPrice()
     })
@@ -34,7 +34,7 @@ export class StatisticsComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.marketPriceSubscribe.unsubscribe()
+    this.marketPriceSubscription.unsubscribe()
     this.confirmedTransSubscribe.unsubscribe()
   }
 
