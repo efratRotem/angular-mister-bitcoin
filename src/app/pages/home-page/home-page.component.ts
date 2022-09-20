@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Contact } from 'src/app/models/contact.model';
+import { User } from 'src/app/models/user';
 import { BitcoinService } from 'src/app/services/bitcoin-service/bitcoin.service';
 import { ContactService } from 'src/app/services/contact-service/contact.service';
+import { UserService } from 'src/app/services/user-service/user.service';
 
 @Component({
   selector: 'home-page',
@@ -10,13 +12,15 @@ import { ContactService } from 'src/app/services/contact-service/contact.service
 })
 export class HomePageComponent implements OnInit {
 
-  user!: Contact
+  user!: User
   btc!: number
   dollar!: number
 
   constructor(
     private contactService: ContactService,
-    private bitcoinService: BitcoinService
+    private bitcoinService: BitcoinService,
+    private userService: UserService,
+
   ) { }
 
   ngOnInit(): void {
@@ -29,7 +33,7 @@ export class HomePageComponent implements OnInit {
   }
 
   getUser() {
-    this.user = this.contactService.getUser()
+    this.user = this.userService.getUser()
     this.user.coins = 100
   }
 
