@@ -1,0 +1,12 @@
+@import '../../../../styels/setup/variables';
+
+.contact-preview {
+   border: 1px solid $main-text;
+   border-radius: 5px;
+   padding: 20px;
+   margin: 20px 0;
+   box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, $main-text 0px 3px 6px;
+   h1 {
+    padding: 10px;
+   }
+}
