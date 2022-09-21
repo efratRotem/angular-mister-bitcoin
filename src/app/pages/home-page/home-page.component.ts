@@ -24,6 +24,8 @@ export class HomePageComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    console.log('\n*@*@*@*@*@*@*@*@*@*@*@*@*@*@ \nThank you for watching my first project in Angulra.\nThe project is still in developing stage.\n*@*@*@*@*@*@*@*@*@*@*@*@*@*@')
+    
     this.getUser()
     const btc$ = this.bitcoinService.getRate()
     btc$.subscribe((rate: number) => {

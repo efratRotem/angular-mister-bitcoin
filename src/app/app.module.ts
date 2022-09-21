@@ -10,6 +10,7 @@ import { StatisticsComponent } from './cmps/statistics/statistics.component';
 import { ContactPageComponent } from './pages/contact-page/contact-page/contact-page.component';
 import { ContactListComponent } from './cmps/contact-list/contact-list/contact-list.component';
 import { ContactPreviewComponent } from './cmps/contact-preview/contact-preview/contact-preview.component';
+import { ContactDetailsPageComponent } from './pages/contact-details-page/contact-details-page/contact-details-page.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { ContactPreviewComponent } from './cmps/contact-preview/contact-preview/
     StatisticsComponent,
     ContactPageComponent,
     ContactListComponent,
-    ContactPreviewComponent
+    ContactPreviewComponent,
+    ContactDetailsPageComponent
   ],
   imports: [
     BrowserModule,
